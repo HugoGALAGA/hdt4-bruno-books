@@ -13,7 +13,7 @@ runtime:
     - type: tests
       code: |-
         test("Reset estado inicial", function() {
-          expect(res.getStatus()).to.equal(200);
+          expect(res.getStatus()).to.equal(201);
           expect(res.getBody().books).to.equal(3);
         });
 
