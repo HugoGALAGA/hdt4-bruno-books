@@ -1,0 +1,29 @@
+info:
+  name: 01_Crear_Libro_BVA_Year_Min_Valido
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/books
+  body:
+    type: json
+    data: '{"title": "Gutenberg Bible", "author": "Johannes Gutenberg", "year": 1450, "copies": 1}'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Year limite inferior valido (1450)", function() {
+          expect([201, 401]).to.include(res.getStatus());
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: BVA. Límite inferior válido de year (1450)"

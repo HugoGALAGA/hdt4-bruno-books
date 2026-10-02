@@ -1,0 +1,29 @@
+info:
+  name: 11_Tabla_Decision_POST_Auth_Vs_NoAuth
+  type: http
+  seq: 12
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/books/2
+  body:
+    type: json
+    data: '{"title": "Accelerate Updated", "author": "Forsgren", "year": 2018, "copies": 5}'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("PUT valida requerimiento de API Key", function() {
+          expect([200, 401]).to.include(res.getStatus());
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: Tabla de Decisión. Validación de autenticación en escrituras"

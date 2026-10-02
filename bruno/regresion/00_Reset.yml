@@ -1,0 +1,27 @@
+info:
+  name: 00_Reset
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/reset
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Reset estado inicial", function() {
+          expect(res.getStatus()).to.equal(200);
+          expect(res.getBody().books).to.equal(3);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: Transición de Estados. Restablece la base de datos al estado inicial."

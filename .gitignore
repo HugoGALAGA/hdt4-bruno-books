@@ -2,3 +2,7 @@ __pycache__/
 *.xml
 .DS_Store
 .venv/
+results.xml
+junit-regresion.xml
+api.log
+api.pid

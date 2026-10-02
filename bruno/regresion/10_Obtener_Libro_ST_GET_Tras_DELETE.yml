@@ -1,0 +1,26 @@
+info:
+  name: 10_Obtener_Libro_ST_GET_Tras_DELETE
+  type: http
+  seq: 11
+
+http:
+  method: GET
+  url: http://127.0.0.1:8000/books/1
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("GET tras DELETE confirma eliminacion", function() {
+          expect(res.getStatus()).to.equal(404);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: Transición de Estados. Confirmación de 404 en recurso eliminado"

@@ -1,0 +1,29 @@
+info:
+  name: 05_Crear_Libro_EP_Title_Vacio
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/books
+  body:
+    type: json
+    data: '{"title": "", "author": "Valid Author", "year": 2020, "copies": 1}'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Title vacio rechazado", function() {
+          expect(res.getStatus()).to.equal(422);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: EP. Título vacío no permitido"

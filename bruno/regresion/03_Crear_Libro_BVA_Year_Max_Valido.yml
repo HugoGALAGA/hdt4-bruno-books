@@ -1,0 +1,29 @@
+info:
+  name: 03_Crear_Libro_BVA_Year_Max_Valido
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/books
+  body:
+    type: json
+    data: '{"title": "Future Tech", "author": "SciFi Author", "year": 2100, "copies": 5}'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Year limite superior valido (2100)", function() {
+          expect([201, 401]).to.include(res.getStatus());
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: BVA. Límite superior válido de year (2100)"

@@ -1,0 +1,29 @@
+info:
+  name: 04_Crear_Libro_BVA_Year_Max_Invalido
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/books
+  body:
+    type: json
+    data: '{"title": "Far Future", "author": "SciFi Author", "year": 2101, "copies": 1}'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Year fuera de limite superior (2101)", function() {
+          expect(res.getStatus()).to.equal(422);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: BVA. Límite superior inválido de year (2101)"

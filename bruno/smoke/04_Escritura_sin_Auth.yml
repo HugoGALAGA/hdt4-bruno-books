@@ -1,0 +1,37 @@
+info:
+  name: 04_Escritura_sin_Auth
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/books
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "year": 2008,
+        "copies": 5
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Comprueba respuesta de escritura", function() {
+          // Si DEMO_API_KEY no está configurada responde 201; si está activa responde 401
+          expect([201, 401]).to.include(res.getStatus());
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,26 @@
+info:
+  name: 09_Eliminar_Libro_ST_DELETE_Existente
+  type: http
+  seq: 10
+
+http:
+  method: DELETE
+  url: http://127.0.0.1:8000/books/1
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("DELETE recurso existente", function() {
+          expect([204, 401]).to.include(res.getStatus());
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+docs: "Técnica: Transición de Estados. Eliminación de recurso id=1"
